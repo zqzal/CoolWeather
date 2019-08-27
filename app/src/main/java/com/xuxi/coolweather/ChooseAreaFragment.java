@@ -31,7 +31,6 @@ import java.util.List;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
-import okhttp3.internal.Util;
 
 public class ChooseAreaFragment extends Fragment {
 
@@ -92,7 +91,7 @@ public class ChooseAreaFragment extends Fragment {
         listView = view.findViewById(R.id.list_view);
         adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,dataList);
         listView.setAdapter(adapter);
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return view;
     }
 
     @Override
