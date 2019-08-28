@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,7 +17,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        replaceFragment(new ChooseAreaFragment());
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        if (prefs.getString("weather",null) != null){
+            Intent intent = new Intent(this,WeatherActivity.class);
+            startActivity(intent);
+            finish();
+        }else {
+            replaceFragment(new ChooseAreaFragment());
+        }
     }
 
     public void replaceFragment(Fragment fragment){

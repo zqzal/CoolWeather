@@ -1,6 +1,11 @@
 package com.xuxi.coolweather;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.SharedPreferences;
@@ -11,6 +16,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -61,6 +67,9 @@ public class WeatherActivity extends AppCompatActivity {
 
     private String mWeatherId;
 
+    public DrawerLayout drawerLayout;
+
+    private Button navButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,12 +95,19 @@ public class WeatherActivity extends AppCompatActivity {
         sportText = findViewById(R.id.sport_text);
 
         bingPicImg = findViewById(R.id.bing_pic_img);
-        loadBingPic();
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String bingPic = prefs.getString("bing_pic",null);
+        if (bingPic != null){
+            Glide.with(this).load(bingPic).into(bingPicImg);
+        }else {
+            loadBingPic();
+        }
 
 
         swipeRefresh = findViewById(R.id.swipe_refresh);
         swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+//        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String weatherSring = prefs.getString("weather",null);
         if (weatherSring != null){
             //有缓存时直接解析天气预报
@@ -113,10 +129,18 @@ public class WeatherActivity extends AppCompatActivity {
         });
 
 
-
-
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navButton = findViewById(R.id.nav_button);
+        navButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
 
     }
+
+
     /**
      * 加载必应每日一图
      */
@@ -186,6 +210,7 @@ public class WeatherActivity extends AppCompatActivity {
                 });
             }
         });
+        loadBingPic();
     }
     /**
      * 处理并展示Weather实体类中的数据
