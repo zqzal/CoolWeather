@@ -16,7 +16,7 @@
         android:textSize="20sp"/>
 
     <TextView
-        android:id="@+id/confort_text"
+        android:id="@+id/comfort_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
