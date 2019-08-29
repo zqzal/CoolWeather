@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.xuxi.coolweather.gson.Forecast;
 import com.xuxi.coolweather.gson.Weather;
+import com.xuxi.coolweather.service.AutoUpdateService;
 import com.xuxi.coolweather.util.HttpUtil;
 import com.xuxi.coolweather.util.Utility;
 
@@ -252,6 +254,7 @@ public class WeatherActivity extends AppCompatActivity {
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
 
-
+        Intent intent = new Intent(this, AutoUpdateService.class);
+        startService(intent);
     }
 }
