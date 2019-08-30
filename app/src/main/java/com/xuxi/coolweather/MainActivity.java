@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     public void replaceFragment(Fragment fragment){
         //动态添加碎片
         //创建待添加的碎片
