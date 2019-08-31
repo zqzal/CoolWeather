@@ -6,4 +6,6 @@
     <string name="aqimoren">63</string>
     <string name="pmzhishu">PM2.5指数</string>
     <string name="shenghuojianyi">生活建议</string>
+    <string name="gdtslogan">GDTslogan</string>
+    <string name="click_to_skip">点击跳过</string>
 </resources>
